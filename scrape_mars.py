@@ -56,14 +56,14 @@ def scrape():
     html = requests.get(mars_facts_url)
     df = pd.read_html(html.text)
     mars_facts_df = df[0]
-
     cols = ["Stats", "Values"]
-
     mars_facts_df.set_axis(cols,axis="columns",inplace=True)
     mars_facts_df.set_index(["Stats","Values"],inplace=True)
+    #Add bootstrap classes to table HTML markup.
     mars_facts_html_table = mars_facts_df.to_html(classes=["table","table-striped"])
-
     mars_facts_html_table = mars_facts_html_table.replace('\n', '')
+
+    #Scrape Mars Hemisphere images using selenium
     browser.visit(mars_hemisphers_url)
     time.sleep(1)
     bs = BeautifulSoup(browser.html,'html.parser')
@@ -81,6 +81,7 @@ def scrape():
         hemi_dict = {"title":title_url, "img_url":img_url}
         hemi_image_url_list.append(hemi_dict)
 
+    #BUild return dictionary of required Mars faacts
     final_dict = {
         "LatestNewsTitle": title,
         "LatestNewsParagraph":paragraph,
@@ -89,5 +90,6 @@ def scrape():
         "HemispherImageUrlList":hemi_image_url_list
     }
     browser.quit()
+
     return final_dict
 
