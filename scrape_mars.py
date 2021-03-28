@@ -49,7 +49,7 @@ def scrape():
     browser.click_link_by_href(large_image_html)
     bs = BeautifulSoup(browser.html,'html.parser')
     results = bs.find("div",class_= "BaseImagePlaceholder")
-    featured_image_url = results.img['src']
+    featured_image_url = results.img['data-src']
 
     #Scrape HTML Tables Mars Stats with Pandas
 
@@ -61,7 +61,7 @@ def scrape():
 
     mars_facts_df.set_axis(cols,axis="columns",inplace=True)
     mars_facts_df.set_index(["Stats","Values"],inplace=True)
-    mars_facts_html_table = mars_facts_df.to_html()
+    mars_facts_html_table = mars_facts_df.to_html(classes=["table","table-striped"])
 
     mars_facts_html_table = mars_facts_html_table.replace('\n', '')
     browser.visit(mars_hemisphers_url)
@@ -88,7 +88,6 @@ def scrape():
         "MarsFactHtml":mars_facts_html_table,
         "HemispherImageUrlList":hemi_image_url_list
     }
-
+    browser.quit()
     return final_dict
 
-retval = scrape()

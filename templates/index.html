@@ -15,22 +15,37 @@
       <h1>Mission To Mars</h1>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
     </div>
-    <h2>
+    <h2> Latest News</h2>
+    <h3>
       {{mars_info.LatestNewsTitle}}
-    </h2>
+    </h3>
     <p>{{mars_info.LatestNewsParagraph}}</p>
+    <hr>
     <div class="col-sm-6 center-block">
-      <h2 class="text-center">Featured Mars Image</h2>
+      <h3 class="text-center">Featured Mars Image</h3>
       <img src="{{mars_info.FeatureImageUrl}}" alt="Mars Featured">
     </div>
     <div class="col-sm-6 center-block">
-      <h2 class="text-center">Featured Mars Image</h2>
+      <h3  class="text-center">Mars Fact</h3>
       <div class="table table-striped">
         {{mars_info.MarsFactHtml|safe}}
       </div>        
     </div>
-  </div>
-  </div>
+    <div class="container"> 
+     <div class="row">
+      {% for  marsimage in mars_info.HemispherImageUrlList %}
+        <div class="col-12 col-sm-6 col-md col-lg">
+            <figure>
+                <div class="thumbnail">
+                  <img class="img-thumbnail" src={{ marsimage.img_url }} alt="..." >
+                </div>
+                <figcaption class="figc" style="font-weight:bold";>{{ marsimage.title }}</figcaption>
+            </figure>
+        </div>
+      {% endfor %}
+   </div>
+  </div>    
+ </div>
 </body>
 
 </html>
