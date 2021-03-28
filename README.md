@@ -117,3 +117,8 @@ However, I utilize a **foreach** to gearate the **div** containers for the four 
 
 ## Resulting Web Screenshots
 
+**Screenshot 1**
+![Screenshot 1](Images/final_screenshot1.PNG)
+
+**Screenshot 2**
+![Screenshot 2](Images/final_screenshot2.PNG)
